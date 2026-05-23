@@ -1,10 +1,6 @@
 name: github_action
 run-name: github_action
-on:
-  pull_request:
-    branches:
-      - main
-      - dev
+on: push
 jobs:
   production-deploy:
     runs-on:
