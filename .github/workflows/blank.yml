@@ -3,8 +3,7 @@ run-name: github_action
 on: push
 jobs:
   production-deploy:
-    runs-on:
-      group: default
+    runs-on: agent_vinod
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v4
