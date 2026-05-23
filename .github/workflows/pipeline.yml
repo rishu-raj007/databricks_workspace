@@ -9,7 +9,10 @@ permissions:
 jobs:
   terraform-init-plan:
     runs-on: self-hosted
-    working-directory: ./env/dev
+    defaults:
+      run:
+        shell: cmd
+        working-directory: ./env/dev
     steps:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
