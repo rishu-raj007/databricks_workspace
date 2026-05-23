@@ -10,6 +10,14 @@ jobs:
   terraform-init-plan:
     runs-on: self-hosted
     steps:
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.8.5
+          
+      - name: Verify Terraform
+        run: terraform version
+        
       - name: Checkout
         uses: actions/checkout@v5.0.0
           
