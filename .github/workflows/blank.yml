@@ -1,0 +1,17 @@
+name: github_action
+run-name: github_action
+on:
+  pull_request:
+    branches:
+      - main
+      - dev
+jobs:
+  production-deploy:
+    runs-on:
+      group: default
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '14'
+      - run: echo hello world
