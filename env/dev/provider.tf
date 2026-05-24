@@ -11,6 +11,11 @@ terraform {
       version = "~> 3.0"
     }
   }
+  backend "azurerm" {
+    container_name = "backend"
+    storage_account_name = "githubbackend1234"
+    key = "dev.terraform.tfstate"
+  }
 }
 
 provider "azurerm" {
