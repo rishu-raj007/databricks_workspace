@@ -15,6 +15,7 @@ terraform {
     container_name = "backend"
     storage_account_name = "githubbackend1234"
     key = "dev.terraform.tfstate"
+    resource_group_name = "github-backend"
   }
 }
 
