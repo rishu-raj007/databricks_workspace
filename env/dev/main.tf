@@ -1,5 +1,5 @@
 # Resource Group for the Dev environment
-resource "azurerm_resource_group" "this" {
+resource "azurerm_resource_group" "rg" {
   name     = "${var.prefix}-rg"
   location = var.location
   tags     = var.tags
@@ -11,7 +11,7 @@ module "network" {
   source   = "../../modules/network"
 
   prefix              = "${var.prefix}-${each.key}"
-  resource_group_name = azurerm_resource_group.this.name
+  resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
   vnet_cidr           = each.value.vnet_cidr
   public_subnet_cidr  = each.value.public_subnet_cidr
@@ -25,7 +25,7 @@ module "ngs" {
   source   = "../../modules/ngs"
 
   prefix              = "${var.prefix}-${each.key}"
-  resource_group_name = azurerm_resource_group.this.name
+  resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
   tags                = var.tags
 }
@@ -47,7 +47,7 @@ module "databricks_workspace" {
   source   = "../../modules/databricks_workspace"
 
   prefix              = "${var.prefix}-${each.key}"
-  resource_group_name = azurerm_resource_group.this.name
+  resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
   sku                 = each.value.sku
   vnet_id             = module.network[each.key].vnet_id
@@ -66,7 +66,7 @@ module "metastore_storage" {
   source   = "../../modules/metastore_storage"
 
   prefix              = "${var.prefix}-${each.key}"
-  resource_group_name = azurerm_resource_group.this.name
+  resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
   tags                = var.tags
 }
@@ -83,7 +83,7 @@ module "role_assignment" {
 # --- Environment Level Outputs ---
 
 output "resource_group_name" {
-  value       = azurerm_resource_group.this.name
+  value       = azurerm_resource_group.rg.name
   description = "The name of the Resource Group created for the environment."
 }
 
