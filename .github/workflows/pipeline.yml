@@ -33,3 +33,6 @@ jobs:
           subscription-id: a3a2627e-fe07-4b90-85fb-a59dc55c5c9a
       - name: terraform init
         run: terraform init
+      - name: terraform plan
+        run: terraform plan
+      
