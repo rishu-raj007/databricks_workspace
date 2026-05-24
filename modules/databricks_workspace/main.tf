@@ -1,4 +1,4 @@
-resource "azurerm_databricks_workspace" "this" {
+resource "azurerm_databricks_workspace" "workspace" {
   name                        = "${var.prefix}-dbw"
   resource_group_name         = var.resource_group_name
   location                    = var.location
@@ -16,7 +16,7 @@ resource "azurerm_databricks_workspace" "this" {
   }
 }
 
-resource "azurerm_databricks_access_connector" "this" {
+resource "azurerm_databricks_access_connector" "connector" {
   name                = "${var.prefix}-dbac"
   resource_group_name = var.resource_group_name
   location            = var.location

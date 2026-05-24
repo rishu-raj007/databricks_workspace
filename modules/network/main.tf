@@ -1,4 +1,4 @@
-resource "azurerm_virtual_network" "this" {
+resource "azurerm_virtual_network" "vnet" {
   name                = "${var.prefix}-vnet"
   resource_group_name = var.resource_group_name
   location            = var.location
@@ -9,7 +9,7 @@ resource "azurerm_virtual_network" "this" {
 resource "azurerm_subnet" "public" {
   name                 = "${var.prefix}-public-subnet"
   resource_group_name  = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.this.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.public_subnet_cidr]
 
   delegation {
@@ -29,7 +29,7 @@ resource "azurerm_subnet" "public" {
 resource "azurerm_subnet" "private" {
   name                 = "${var.prefix}-private-subnet"
   resource_group_name  = var.resource_group_name
-  virtual_network_name = azurerm_virtual_network.this.name
+  virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = [var.private_subnet_cidr]
 
   delegation {
