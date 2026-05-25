@@ -7,8 +7,9 @@ permissions:
   id-token: write
   contents: read
 jobs:
-  terraform-init-plan:
+  databricks-workspace:
     runs-on: self-hosted
+    environment: dev
     defaults:
       run:
         shell: cmd
@@ -28,13 +29,13 @@ jobs:
       - name: Azure Login
         uses: Azure/login@v2.3.0
         with:
-          client-id: ead40969-5353-4a27-8d19-fe7ba6c0529b
-          tenant-id: 5b7c8b3b-1d7e-43cc-89e0-a64be7ba6943
-          subscription-id: a3a2627e-fe07-4b90-85fb-a59dc55c5c9a
+          client-id: ${{ vars.CLIENT_ID }}
+          tenant-id: ${{ vars.TENANT_ID }}
+          subscription-id: ${{ vars.SUBSCRIPTION_ID }}
       - name: terraform init
         run: terraform init
       - name: terraform plan
         run: terraform plan
-      - name: terraform destroy
-        run: terraform destroy --auto-approve
+      - name: terraform FINAL
+        run: ${{ vars.TERRAFORM_FINAL_COMMAND }}
       
